@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container pt-5" id="app">
+        <div class="row mb-3">
+            <div class="col">
+                <h1>Cars App</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="search">Find your car</label>
+                    <input type="text" class="form-control" id="search" placeholder="Enter Name or Model" v-model="search">
+
+                    <hr>
+
+                    <ul class="list-group">
+                        <li v-for="(car, index) in filteredCars" class="list-group-item list-group-item-action pointer" v-on:click="selectCar(index)" v-bind:class="{'active': selectCarIndex === index}">{{car.name}} - {{car.model}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8 pt-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h2>{{ model.name }}</h2>
+                        <img :src="model.image" :alt="model.name" class="rounded detailed-car-image">
+                    </div>
+                    <div class="col-md-8 pt-2 pl-5">
+                        <h5>Car Details</h5>
+
+                        <ul>
+                            <li>Model - <strong>{{ model.model }}</strong></li>
+                            <li>Year - <strong>{{ model.year }}</strong></li>
+                            <li>Owner - <strong>{{ model.owner }}</strong></li>
+                        </ul>
+
+                        <div class="phone-block">
+                            <p v-if="phoneHide">{{ model.phone }}</p>
+                        </div>
+
+                        <button class="btn btn-outline-success mr-3" v-on:click="phoneHide = !phoneHide" v-text="phoneBtnText">{</button>
+                        <button class="btn btn-primary" v-on:click="modalVisibility = true">Buy</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>
